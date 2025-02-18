@@ -6,8 +6,9 @@
 #include <QJsonValue>
 #include <QNetworkReply>
 
-RequestGetter::RequestGetter(QObject* parent)
+RequestGetter::RequestGetter(DataStorage* storage, QObject* parent)
     : QObject{parent}
+    , mStorage(storage)
 {
     manager = new QNetworkAccessManager(this);
 
@@ -56,16 +57,15 @@ const QString RequestGetter::getResponseStr()
 
 void RequestGetter::showReply(QNetworkReply* r)
 {
-    qDebug() << "at build time " << QSslSocket::sslLibraryBuildVersionString();
-    qDebug() << QSslSocket::supportsSsl();
-    qDebug() << "sslLibraryVersionString : "
-             << QSslSocket::sslLibraryVersionString();
-    qDebug() << "SHOW REPLY WORKS";
+    // qDebug() << "at build time " <<
+    // QSslSocket::sslLibraryBuildVersionString(); qDebug() <<
+    // QSslSocket::supportsSsl(); qDebug() << "sslLibraryVersionString : "
+    //          << QSslSocket::sslLibraryVersionString();
 
     QByteArray    response     = r->readAll();
     QJsonDocument jsonResponse = QJsonDocument::fromJson(response);
 
-    qDebug() << " JsonRepsonse null ? :  " << jsonResponse.isNull();
+    // qDebug() << " JsonRepsonse null ? :  " << jsonResponse.isNull();
 
     if (jsonResponse.isArray()) {
         QJsonArray jsonArray = jsonResponse.array();
@@ -77,9 +77,12 @@ void RequestGetter::showReply(QNetworkReply* r)
                 int         heroId   = jsonObj["id"].toInt();
                 mp.insert(heroName, heroId);
             }
-            for (auto& it: mp) {
-                qDebug() << it;
-            }
+            // вывод полученного массива
+            // for (auto i = mp.begin(); i != mp.end(); i++) {
+            //     qDebug() << i.key() << " : " << i.value();
+            // }
+            mStorage->setHeroesXid(mp);
+            emit requestComplete();
         }
     }
 }

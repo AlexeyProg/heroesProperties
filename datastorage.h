@@ -12,6 +12,9 @@ public:
     explicit DataStorage(QObject* parent = nullptr);
 
 public:
+    QMap<QString, int> getHeroesXid();
+    void               setHeroesXid(const QMap<QString, int>& map);
+
 private:
     // мап 'hero : heroId'
     QMap<QString, int> heroesXid;

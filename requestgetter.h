@@ -6,6 +6,8 @@
 #include <QObject>
 #include <QUrl>
 
+#include "datastorage.h"
+
 class RequestGetter : public QObject {
     Q_OBJECT
 
@@ -19,7 +21,7 @@ public:
     Q_ENUM(RequestType)
 
 public:
-    explicit RequestGetter(QObject* parent = nullptr);
+    explicit RequestGetter(DataStorage* storage, QObject* parent = nullptr);
 
 public:
     bool          getRequest(RequestType type);
@@ -36,9 +38,13 @@ private:
     QNetworkAccessManager* manager;
 
     RequestType            mType;
+    DataStorage*           mStorage = nullptr;
 
 public slots:
     void showReply(QNetworkReply* r);
+
+signals:
+    void requestComplete();
 };
 
 #endif // REQUESTGETTER_H
