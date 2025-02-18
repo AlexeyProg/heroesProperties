@@ -44,7 +44,7 @@ bool RequestGetter::getRequest(RequestType type)
     }
     QUrl            curUrl(response);
     QNetworkRequest req(curUrl);
-    qDebug() << " response str : " << response;
+    // qDebug() << " response str : " << response;
     manager->get(QNetworkRequest(req));
 
     return true;
@@ -57,15 +57,8 @@ const QString RequestGetter::getResponseStr()
 
 void RequestGetter::showReply(QNetworkReply* r)
 {
-    // qDebug() << "at build time " <<
-    // QSslSocket::sslLibraryBuildVersionString(); qDebug() <<
-    // QSslSocket::supportsSsl(); qDebug() << "sslLibraryVersionString : "
-    //          << QSslSocket::sslLibraryVersionString();
-
     QByteArray    response     = r->readAll();
     QJsonDocument jsonResponse = QJsonDocument::fromJson(response);
-
-    // qDebug() << " JsonRepsonse null ? :  " << jsonResponse.isNull();
 
     if (jsonResponse.isArray()) {
         QJsonArray jsonArray = jsonResponse.array();
@@ -82,7 +75,8 @@ void RequestGetter::showReply(QNetworkReply* r)
             //     qDebug() << i.key() << " : " << i.value();
             // }
             mStorage->setHeroesXid(mp);
-            emit requestComplete();
         }
+
+        emit requestComplete();
     }
 }

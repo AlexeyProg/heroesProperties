@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include "datastorage.h"
+#include "mainmanager.h"
 #include "requestgetter.h"
 
 MainWindow::MainWindow(QWidget* parent)
@@ -22,6 +23,10 @@ MainWindow::MainWindow(QWidget* parent)
         }
     });
     //
+
+    MainManagerWindow* mainW = new MainManagerWindow(this);
+
+    setCentralWidget(mainW);
 }
 
 MainWindow::~MainWindow()
