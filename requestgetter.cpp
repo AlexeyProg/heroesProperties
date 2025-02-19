@@ -64,17 +64,20 @@ void RequestGetter::showReply(QNetworkReply* r)
         QJsonArray jsonArray = jsonResponse.array();
         if (mType == RequestType::Heroes) {
             QMap<QString, int> mp;
+            QStringList        heroesNames;
             for (const QJsonValue& it: jsonArray) {
                 QJsonObject jsonObj  = it.toObject();
                 QString     heroName = jsonObj["localized_name"].toString();
                 int         heroId   = jsonObj["id"].toInt();
                 mp.insert(heroName, heroId);
+                heroesNames.push_back(heroName);
             }
             // вывод полученного массива
             // for (auto i = mp.begin(); i != mp.end(); i++) {
             //     qDebug() << i.key() << " : " << i.value();
             // }
             mStorage->setHeroesXid(mp);
+            mStorage->setHeroesNames(heroesNames);
         }
 
         emit requestComplete();

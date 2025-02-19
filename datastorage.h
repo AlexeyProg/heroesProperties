@@ -13,12 +13,18 @@ public:
 
 public:
     QMap<QString, int> getHeroesXid();
-    void               setHeroesXid(QMap<QString, int> &map);
+    void               setHeroesXid(QMap<QString, int>& map);
 
     void               getHeroItemsIndexes(const QString& heroName);
     // QList<QString>     convertItems();
 
+    void        setHeroesNames(QStringList& list);
+    QStringList getHeroNames();
+
 private:
+    // список heroes names
+    QStringList                   heroesNames;
+
     QMap<QString, QList<QString>> tempHeroItemsMap;
 
     // мап 'hero : heroId'

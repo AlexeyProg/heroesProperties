@@ -21,3 +21,13 @@ void DataStorage::setHeroesXid(QMap<QString, int>& map)
 void DataStorage::getHeroItemsIndexes(const QString& heroName)
 {
 }
+
+void DataStorage::setHeroesNames(QStringList& list)
+{
+    heroesNames = std::move(list);
+}
+
+QStringList DataStorage::getHeroNames()
+{
+    return heroesNames;
+}
