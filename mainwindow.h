@@ -9,5 +9,7 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
+
+    bool createDelay(int msec);
 };
 #endif // MAINWINDOW_H

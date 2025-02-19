@@ -2,6 +2,7 @@
 
 #include <QGridLayout>
 #include <QPushButton>
+#include <QSplitter>
 
 #include "herolistwidget.h"
 
@@ -9,7 +10,7 @@ MainManagerWindow::MainManagerWindow(DataStorage* storage, QWidget* parent)
     : QWidget{parent}
     , mStorage(storage)
 {
-    setFixedSize(900, 600);
+    // setFixedSize(900, 600);
     generateLayouts();
 }
 

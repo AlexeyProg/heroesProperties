@@ -55,8 +55,19 @@ const QString RequestGetter::getResponseStr()
     return resultStr;
 }
 
+RequestGetter::Status RequestGetter::getStatus() const
+{
+    return status;
+}
+
+void RequestGetter::setStatus(Status newStatus)
+{
+    status = newStatus;
+}
+
 void RequestGetter::showReply(QNetworkReply* r)
 {
+    setStatus(Status::RUNNING);
     QByteArray    response     = r->readAll();
     QJsonDocument jsonResponse = QJsonDocument::fromJson(response);
 
@@ -80,6 +91,8 @@ void RequestGetter::showReply(QNetworkReply* r)
             mStorage->setHeroesNames(heroesNames);
         }
 
+        r->deleteLater(); // Освобождаем ресурсы
+        setStatus(Status::SUCCESS);
         emit requestComplete();
     }
 }

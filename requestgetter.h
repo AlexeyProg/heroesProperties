@@ -12,6 +12,12 @@ class RequestGetter : public QObject {
     Q_OBJECT
 
 public:
+    enum Status {
+        SUCCESS,
+        RUNNING
+    };
+    Q_ENUM(Status)
+
     enum RequestType {
         HeroId,
         ItemId,
@@ -28,10 +34,15 @@ public:
 
     const QString getResponseStr();
 
+    Status getStatus() const;
+    void setStatus(Status newStatus);
+
 private:
     bool sendRequest();
 
 private:
+    Status                 status;
+
     const QString          url = "https://api.opendota.com/api/";
     QString                resultStr;
 
