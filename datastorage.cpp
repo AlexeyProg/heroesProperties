@@ -1,6 +1,5 @@
 #include "datastorage.h"
 
-#include <iostream>
 #include <utility>
 
 DataStorage::DataStorage(QObject* parent)

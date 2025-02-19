@@ -42,14 +42,14 @@ private:
     bool sendRequest();
 
 private:
-    Status                 status;
+    Status                 status = Status::SUCCESS;
 
     const QString          url = "https://api.opendota.com/api/";
     QString                resultStr;
 
     QNetworkAccessManager* manager = nullptr;
 
-    RequestType            mType;
+    RequestType            mType    = RequestType::HeroId;
     DataStorage*           mStorage = nullptr;
 
 public slots:

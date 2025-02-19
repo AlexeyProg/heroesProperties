@@ -16,7 +16,13 @@ MainWindow::MainWindow(QWidget* parent)
 
     // заранее нужно получить список heroes в requestGetter , а потом создать по
     // ним mainwmanagerWindow, но при этом в mainmanagerWindow должен быть
-    // requestGetter. тут парадокс
+    // requestGetter.
+
+    connect(rGetter, &RequestGetter::requestComplete, this, [=]() {
+        MainManagerWindow* mainW = new MainManagerWindow(storage, this);
+
+        setCentralWidget(mainW);
+    });
 
     // bool           res1 = rGetter->getRequest(RequestGetter::Heroes);
 
@@ -38,6 +44,8 @@ MainWindow::MainWindow(QWidget* parent)
 
 MainWindow::~MainWindow()
 {
+    storage->deleteLater();
+    rGetter->deleteLater();
 }
 
 // TODO : доделать delaystep

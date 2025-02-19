@@ -16,6 +16,9 @@ RequestGetter::RequestGetter(DataStorage* storage, QObject* parent)
             SIGNAL(finished(QNetworkReply*)),
             this,
             SLOT(showReply(QNetworkReply*)));
+
+    // сразу запросим список героев
+    getRequest(RequestType::Heroes);
 }
 
 bool RequestGetter::getRequest(RequestType type)
@@ -40,6 +43,7 @@ bool RequestGetter::getRequest(RequestType type)
             break;
         }
         default:
+            response = "Invalid request";
             break;
     }
     QUrl            curUrl(response);
@@ -92,6 +96,7 @@ void RequestGetter::showReply(QNetworkReply* r)
         }
 
         r->deleteLater(); // Освобождаем ресурсы
+
         setStatus(Status::SUCCESS);
         emit requestComplete();
     }
