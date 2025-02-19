@@ -39,5 +39,9 @@ void MainManagerWindow::generateLayouts()
         = new HeroListWidget(mStorage->getHeroNames(), this);
     grid->addWidget(heroListW, 0, 1, 4, 4);
 
+    connect(heroListW, &HeroListWidget::btnHeroPressed, this, [=]() {
+        // request get hero
+    });
+
     this->setLayout(grid);
 }

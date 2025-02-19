@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+class DataStorage;
+class RequestGetter;
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
@@ -11,5 +14,9 @@ public:
     ~MainWindow();
 
     bool createDelay(int msec);
+
+private:
+    RequestGetter* rGetter = nullptr;
+    DataStorage*   storage = nullptr;
 };
 #endif // MAINWINDOW_H

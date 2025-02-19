@@ -18,6 +18,10 @@ void HeroListWidget::generateWidget()
     for (auto& it: mHeroesList) {
         QPushButton* btn = new QPushButton(it);
 
+        connect(btn, &QPushButton::clicked, this, [=]() {
+            emit btnHeroPressed(it);
+        });
+
         grid->addWidget(btn, rowBtn, colBtn++);
         if (colBtn % 6 == 0) {
             rowBtn++;

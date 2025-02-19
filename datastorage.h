@@ -21,6 +21,9 @@ public:
     void        setHeroesNames(QStringList& list);
     QStringList getHeroNames();
 
+public:
+    ~DataStorage() = default;
+
 private:
     // список heroes names
     QStringList                   heroesNames;

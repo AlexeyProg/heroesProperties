@@ -20,6 +20,7 @@ private:
     QGridLayout*                grid = nullptr;
 
 signals:
+    void btnHeroPressed(const QString& name);
 };
 
 #endif // HEROLISTWIDGET_H

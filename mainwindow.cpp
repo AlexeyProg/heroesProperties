@@ -10,25 +10,29 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
 {
-    DataStorage*   storage = new DataStorage(this);
+    storage = new DataStorage(this);
 
-    RequestGetter* rGetter = new RequestGetter(storage, this);
+    rGetter = new RequestGetter(storage, this);
 
-    bool           res1 = rGetter->getRequest(RequestGetter::Heroes);
+    // заранее нужно получить список heroes в requestGetter , а потом создать по
+    // ним mainwmanagerWindow, но при этом в mainmanagerWindow должен быть
+    // requestGetter. тут парадокс
+
+    // bool           res1 = rGetter->getRequest(RequestGetter::Heroes);
 
     // проверка успел ли request выполниться
-    connect(rGetter, &RequestGetter::requestComplete, this, [=]() {
-        // auto a = storage->getHeroesXid();
-        // for (auto i = a.begin(); i != a.end(); i++) {
-        //     qDebug() << i.key() << " : " << i.value();
-        // }
-        if (rGetter->getStatus() == RequestGetter::RUNNING) {
-            QThread::msleep(2000);
-        }
-        MainManagerWindow* mainW = new MainManagerWindow(storage, this);
+    // connect(rGetter, &RequestGetter::requestComplete, this, [=]() {
+    //     // auto a = storage->getHeroesXid();
+    //     // for (auto i = a.begin(); i != a.end(); i++) {
+    //     //     qDebug() << i.key() << " : " << i.value();
+    //     // }
+    //     if (rGetter->getStatus() == RequestGetter::RUNNING) {
+    //         QThread::msleep(2000);
+    //     }
+    //     MainManagerWindow* mainW = new MainManagerWindow(storage, this);
 
-        setCentralWidget(mainW);
-    });
+    //     setCentralWidget(mainW);
+    // });
     //
 }
 

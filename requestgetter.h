@@ -34,8 +34,9 @@ public:
 
     const QString getResponseStr();
 
-    Status getStatus() const;
-    void setStatus(Status newStatus);
+    Status        getStatus() const;
+    void          setStatus(Status newStatus);
+    ~RequestGetter() = default;
 
 private:
     bool sendRequest();
@@ -46,7 +47,7 @@ private:
     const QString          url = "https://api.opendota.com/api/";
     QString                resultStr;
 
-    QNetworkAccessManager* manager;
+    QNetworkAccessManager* manager = nullptr;
 
     RequestType            mType;
     DataStorage*           mStorage = nullptr;
